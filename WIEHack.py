@@ -1,5 +1,6 @@
 from flask import Flask
 from gtts import gTTS
+import requests
 import os
 app = Flask(__name__)
 
@@ -11,8 +12,8 @@ def home():
 def audio():
     tts = gTTS(text='Testing', lang='en')
     tts.save("test.mp3")
-    os.system("mpg321 test.mp3")
-    return "os.system('mpg321 test.mp3')"
+    #os.system("mpg321 test.mp3")
+    return os.system('mpg321 test.mp3')
 
 if __name__=='__main__':
     app.run(host='0.0.0.0',debug=True)
