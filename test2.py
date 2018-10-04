@@ -7,8 +7,6 @@ from google.cloud import vision
 from google.cloud.vision import types
 
 # Instantiates a client
-
-
 def detect_text(path):
     """Detects text in the file."""
     client = vision.ImageAnnotatorClient()
