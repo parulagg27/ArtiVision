@@ -1,12 +1,18 @@
 from gtts import gTTS
-import os
+import os,time
 import io
 
 # Imports the Google Cloud client library
 from google.cloud import vision
 from google.cloud.vision import types
 
-# Instantiates a client
+
+path_to_watch = "/home/gunnika/Pictures/Webcam"
+
+before = dict ([(f, None) for f in os.listdir (path_to_watch)])
+
+# IMAGE TO TEXT FUNCTION
+
 def detect_text(path):
     """Detects text in the file."""
     client = vision.ImageAnnotatorClient()
@@ -26,11 +32,25 @@ def detect_text(path):
 	    os.system("mpg321 abc.mp3")
         #print(a)
         #with open("Output.txt", "w") as text_file:
-       #     text_file.write(a)
-    
-    
+       #   text_file.write(a)
 
 
-if __name__ == "__main__":
-	detect_text('file-page1.jpg')
+while (1):
+  time.sleep (1)
+  after = dict ([(f, None) for f in os.listdir (path_to_watch)])
+
+  added = [f for f in after if not f in before]
+  removed = [f for f in before if not f in after]
+
+  if (added): 
+    print ("Added: ", ", ".join (added))
+    new_path = '/home/gunnika/Pictures/Webcam/'+added[0]
+    detect_text(new_path)
+
+  if (removed): 
+  	print ("Removed: ", ", ".join (removed))
+  before = after
+
+# Instantiates a client
+
 
